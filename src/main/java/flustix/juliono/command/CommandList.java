@@ -72,7 +72,7 @@ public class CommandList {
 
                     EmbedBuilder embed = new EmbedBuilder()
                             .setTitle("You dont have enough permissions to run this command.")
-                            .setDescription("You need the following permissions to execute this command: " + command.permissions.toString())
+                            .setDescription("You need the following permissions to execute this command: `" + missingPermissions + "`")
                             .setColor(0xFF5555);
 
                     MessageUtils.reply(msg, embed);
