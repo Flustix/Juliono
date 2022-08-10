@@ -43,7 +43,7 @@ public class MessageListener extends ListenerAdapter {
                 embed.addField("Content", message.content, false);
 
             if (!message.attachments.isEmpty())
-                embed.addField("Content", message.attachments.replace(",", ", "), false);
+                embed.addField("Attachments", message.attachments.replace(",", ", "), false);
 
             MessageUtils.send(Main.config.get("logChannel").getAsString(), embed);
         } catch (SQLException e) {

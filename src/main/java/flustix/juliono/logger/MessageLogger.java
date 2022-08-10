@@ -22,7 +22,7 @@ public class MessageLogger {
                 "', '" + msg.getId() +
                 "', '" + msg.getChannel().getId() +
                 "', '" + System.currentTimeMillis() +
-                "', '" + msg.getContentRaw() +
+                "', '" + msg.getContentRaw().replace("'", "\\'").replace("`", "\\`") +
                 "', '" + attachments +
                 "')");
     }
