@@ -30,4 +30,8 @@ public class MessageUtils {
     public static Message send(String channelID, EmbedBuilder embed) {
         return Main.bot.getTextChannelById(channelID).sendMessage(new MessageBuilder().setEmbeds(embed.build()).build()).complete();
     }
+
+    public static long getTimestampFromSnowflake(long snowflake) {
+        return (snowflake >> 22) + 1420070400000L;
+    }
 }

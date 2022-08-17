@@ -1,47 +1,31 @@
 package flustix.juliono.logger;
 
-import flustix.juliono.database.Database;
 import net.dv8tion.jda.api.entities.Message;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MessageLogger {
+    private static final Map<Long, CachedMessage> messages = new HashMap<>();
+
     public static void log(Message msg) {
-        String attachments = "";
+        System.out.println("Logging message: " + msg.getContentRaw());
+        ArrayList<String> attachments = new ArrayList<>();
 
         for (Message.Attachment attachment : msg.getAttachments()) {
-            if (!attachments.isEmpty()) {
-                attachments += ",";
-            }
-            attachments += attachment.getUrl();
+            attachments.add(attachment.getUrl());
         }
 
-        Database.execQuery("INSERT INTO `messages` (`userid`, `messageid`, `channelid`, `timestamp`, `content`, `attachments`) VALUES (" +
-                "'" + msg.getAuthor().getId() +
-                "', '" + msg.getId() +
-                "', '" + msg.getChannel().getId() +
-                "', '" + System.currentTimeMillis() +
-                "', '" + msg.getContentRaw().replace("'", "\\'").replace("`", "\\`") +
-                "', '" + attachments +
-                "')");
+        messages.put(msg.getIdLong(), new CachedMessage(msg.getIdLong(),
+                msg.getAuthor().getIdLong(),
+                msg.getChannel().getIdLong(),
+                msg.getContentRaw(),
+                attachments.toArray(new String[0])));
+
     }
 
-    public static LoggedMessage getLogged(String id) throws SQLException {
-        ResultSet rs = Database.execQuery("SELECT * FROM `messages` WHERE `messageid` = '" + id + "'");
-
-        while (rs.next()) {
-            LoggedMessage message = new LoggedMessage();
-            message.userid = rs.getString("userid");
-            message.messageid = rs.getString("messageid");
-            message.channelid = rs.getString("channelid");
-            message.timestamp = rs.getLong("timestamp");
-            message.content = rs.getString("content");
-            message.attachments = rs.getString("attachments");
-
-            return message;
-        }
-
-        return null;
+    public static CachedMessage getLogged(long id) {
+        return messages.getOrDefault(id, null);
     }
 }

@@ -3,7 +3,7 @@ package flustix.juliono.listeners;
 import com.github.marlonlom.utilities.timeago.TimeAgo;
 import flustix.juliono.Main;
 import flustix.juliono.command.CommandList;
-import flustix.juliono.logger.LoggedMessage;
+import flustix.juliono.logger.CachedMessage;
 import flustix.juliono.logger.MessageLogger;
 import flustix.juliono.utils.MessageUtils;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -11,8 +11,6 @@ import net.dv8tion.jda.api.events.message.MessageDeleteEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
-
-import java.sql.SQLException;
 
 public class MessageListener extends ListenerAdapter {
     public void onMessageReceived(@NotNull MessageReceivedEvent msg) {
@@ -26,33 +24,32 @@ public class MessageListener extends ListenerAdapter {
     }
 
     public void onMessageDelete(@NotNull MessageDeleteEvent event) {
-        try {
-            LoggedMessage message = MessageLogger.getLogged(event.getMessageId());
-            message.loadData();
+        CachedMessage message = MessageLogger.getLogged(event.getMessageIdLong());
 
-            EmbedBuilder embed = new EmbedBuilder().setColor(Main.accentColor);
-
-            embed.setTitle("Message deleted!");
-            embed.setDescription(
-                    "Sent by " + message.user.getAsMention() +
-                            " in " + message.channel.getAsMention() + " " +
-                            TimeAgo.using(message.timestamp)
-            );
-
-            if (!message.content.isEmpty())
-                embed.addField("Content", message.content, false);
-
-            if (!message.attachments.isEmpty())
-                embed.addField("Attachments", message.attachments.replace(",", ", "), false);
-
-            MessageUtils.send(Main.config.get("logChannel").getAsString(), embed);
-        } catch (SQLException e) {
+        if(message == null) {
             EmbedBuilder embed = new EmbedBuilder()
                     .setTitle("A message got deleted! But... i dont know what it was.")
                     .setDescription("Message ID: " + event.getMessageId())
                     .setColor(Main.accentColor);
             MessageUtils.send(Main.config.get("logChannel").getAsString(), embed);
-            e.printStackTrace();
+            return;
         }
+
+        EmbedBuilder embed = new EmbedBuilder().setColor(Main.accentColor);
+
+        embed.setTitle("Message deleted!");
+        embed.setDescription(
+                "Sent by <@" + message.userId + ">" +
+                        " in <#" + message.channelId + "> " +
+                        TimeAgo.using(MessageUtils.getTimestampFromSnowflake(message.id))
+        );
+
+        if (!message.content.isEmpty())
+            embed.addField("Content", message.content, false);
+
+        if (message.attachments.length > 0)
+            embed.addField("Attachments", String.join("\n", message.attachments), false);
+
+        MessageUtils.send(Main.config.get("logChannel").getAsString(), embed);
     }
 }
