@@ -21,7 +21,7 @@ dependencies {
 
 jar {
     manifest {
-        attributes 'Main-Class': 'flustix.juliono.Main'
+        attributes 'Main-Class': 'flustix.julino.Main'
     }
 
     doFirst {

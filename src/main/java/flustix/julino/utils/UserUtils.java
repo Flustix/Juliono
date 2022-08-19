@@ -1,6 +1,6 @@
-package flustix.juliono.utils;
+package flustix.julino.utils;
 
-import flustix.juliono.Main;
+import flustix.julino.Main;
 import net.dv8tion.jda.api.entities.User;
 
 public class UserUtils {

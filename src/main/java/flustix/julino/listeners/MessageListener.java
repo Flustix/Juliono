@@ -1,11 +1,11 @@
-package flustix.juliono.listeners;
+package flustix.julino.listeners;
 
 import com.github.marlonlom.utilities.timeago.TimeAgo;
-import flustix.juliono.Main;
-import flustix.juliono.command.CommandList;
-import flustix.juliono.logger.CachedMessage;
-import flustix.juliono.logger.MessageLogger;
-import flustix.juliono.utils.MessageUtils;
+import flustix.julino.Main;
+import flustix.julino.command.CommandList;
+import flustix.julino.logger.CachedMessage;
+import flustix.julino.logger.MessageLogger;
+import flustix.julino.utils.MessageUtils;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageDeleteEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;

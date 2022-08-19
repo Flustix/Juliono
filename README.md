@@ -1,4 +1,4 @@
-# Juliono
+# Julino
 A multipurpose Discord bot for JuliGames
 
 ### Features

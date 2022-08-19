@@ -1,4 +1,4 @@
-package flustix.juliono.logger;
+package flustix.julino.logger;
 
 import net.dv8tion.jda.api.entities.Message;
 

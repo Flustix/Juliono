@@ -1,4 +1,4 @@
-package flustix.juliono.command;
+package flustix.julino.command;
 
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;

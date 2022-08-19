@@ -1,4 +1,4 @@
-package flustix.juliono.logger;
+package flustix.julino.logger;
 
 public class CachedMessage {
     public long id;

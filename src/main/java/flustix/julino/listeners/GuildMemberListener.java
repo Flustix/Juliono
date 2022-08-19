@@ -1,7 +1,7 @@
-package flustix.juliono.listeners;
+package flustix.julino.listeners;
 
-import flustix.juliono.Main;
-import flustix.juliono.utils.MessageUtils;
+import flustix.julino.Main;
+import flustix.julino.utils.MessageUtils;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.MessageBuilder;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;

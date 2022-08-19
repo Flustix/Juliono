@@ -1,8 +1,8 @@
-package flustix.juliono.database;
+package flustix.julino.database;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import flustix.juliono.Main;
+import flustix.julino.Main;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

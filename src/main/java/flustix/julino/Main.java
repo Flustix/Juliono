@@ -1,10 +1,10 @@
-package flustix.juliono;
+package flustix.julino;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import flustix.juliono.command.CommandList;
-import flustix.juliono.listeners.GuildMemberListener;
-import flustix.juliono.listeners.MessageListener;
+import flustix.julino.command.CommandList;
+import flustix.julino.listeners.GuildMemberListener;
+import flustix.julino.listeners.MessageListener;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.requests.GatewayIntent;
@@ -21,7 +21,7 @@ public class Main {
     public static String prefix = "!";
     public static int accentColor = 0xf36641;
     public static JDA bot;
-    public static Logger logger = LoggerFactory.getLogger("juliono");
+    public static Logger logger = LoggerFactory.getLogger("julino");
     public static JsonObject config;
     public static Date startTime;
 

@@ -1,9 +1,9 @@
-package flustix.juliono.commands;
+package flustix.julino.commands;
 
 import com.google.gson.JsonParser;
-import flustix.juliono.Main;
-import flustix.juliono.command.Command;
-import flustix.juliono.utils.MessageUtils;
+import flustix.julino.Main;
+import flustix.julino.command.Command;
+import flustix.julino.utils.MessageUtils;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 

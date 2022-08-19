@@ -1,7 +1,7 @@
-package flustix.juliono.command;
+package flustix.julino.command;
 
-import flustix.juliono.Main;
-import flustix.juliono.utils.MessageUtils;
+import flustix.julino.Main;
+import flustix.julino.utils.MessageUtils;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -15,7 +15,7 @@ public class CommandList {
     static TreeMap<String, Command> commands = new TreeMap<>();
 
     public static void init() {
-        Reflections reflects = new Reflections("flustix.juliono");
+        Reflections reflects = new Reflections("flustix.julino");
         Set<Class<? extends Command>> classes = reflects.getSubTypesOf(Command.class);
         for (Class<? extends Command> command : classes) {
             try {
