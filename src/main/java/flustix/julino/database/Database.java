@@ -4,6 +4,7 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import flustix.julino.Main;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -27,9 +28,10 @@ public class Database {
             if (dataSource == null)
                 dataSource = newConnection();
 
-            PreparedStatement ps = dataSource.getConnection().prepareStatement(query);
+            Connection con = dataSource.getConnection();
+            PreparedStatement ps = con.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
-            dataSource.close();
+            con.close();
             return rs;
         } catch (Exception e) {
             Main.logger.error("Error while executing query: " + query, e);
