@@ -8,6 +8,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class Database {
+    static HikariDataSource dataSource;
+
     static HikariDataSource newConnection() {
         HikariConfig cfg = new HikariConfig();
         cfg.setDataSourceClassName("org.mariadb.jdbc.MariaDbDataSource");
@@ -22,10 +24,12 @@ public class Database {
 
     public static ResultSet execQuery(String query) {
         try {
-            HikariDataSource connection = newConnection();
-            PreparedStatement ps = connection.getConnection().prepareStatement(query);
+            if (dataSource == null)
+                dataSource = newConnection();
+
+            PreparedStatement ps = dataSource.getConnection().prepareStatement(query);
             ResultSet rs = ps.executeQuery();
-            connection.close();
+            dataSource.close();
             return rs;
         } catch (Exception e) {
             Main.logger.error("Error while executing query: " + query, e);
